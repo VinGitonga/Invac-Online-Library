@@ -3,10 +3,9 @@ import generateToken from '../utils/generateToken.js'
 import User from '../models/user.js'
 import { OAuth2Client } from 'google-auth-library'
 import { nanoid } from 'nanoid'
-import dotenv from "dotenv"
+import config from '../config/config.js'
 
-dotenv.config()
-const clientId = process.env.GOOGLE_CLIENT_ID
+const clientId = config.googleCloudId
 
 const client = new OAuth2Client(clientId)
 

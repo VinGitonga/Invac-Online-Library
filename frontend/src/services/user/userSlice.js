@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios'
 
-const baseURL = 'http://localhost:3005/api'
+import { REACT_APP_API_BASE_URL } from '../util';
 
 export const registerUser = createAsyncThunk(
     'users/register',
@@ -13,7 +13,7 @@ export const registerUser = createAsyncThunk(
                 }
             }
 
-            const response = await axios.post(`${baseURL}/users/signup`, userData, config);
+            const response = await axios.post(`${REACT_APP_API_BASE_URL}/users/signup`, userData, config);
             console.log(response)
             let data = await response.data;
             console.log(data)
@@ -42,7 +42,7 @@ export const loginUser = createAsyncThunk(
                 }
             }
 
-            const response = await axios.post(`${baseURL}/users/login`, userData, config);
+            const response = await axios.post(`${REACT_APP_API_BASE_URL}/users/login`, userData, config);
             console.log(response)
             let data = await response.data;
             console.log(data)
@@ -71,7 +71,7 @@ export const authGoogle = createAsyncThunk(
 
             console.log(tokenId)
 
-            const response = await axios.post(`${baseURL}/users/google`, tokenId, config);
+            const response = await axios.post(`${REACT_APP_API_BASE_URL}/users/google`, tokenId, config);
             console.log(response)
             let data = await response.data;
             console.log(data)

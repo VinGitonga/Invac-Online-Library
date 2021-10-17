@@ -1,7 +1,8 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios'
 
-const baseURL = 'http://localhost:3005/api'
+import { REACT_APP_API_BASE_URL } from '../util';
+
 
 export const createCategory = createAsyncThunk(
     'categories/create',
@@ -18,7 +19,7 @@ export const createCategory = createAsyncThunk(
                 }
             }
 
-            const response = await axios.post(`${baseURL}/categories/create_cat`, categoryData, config);
+            const response = await axios.post(`${REACT_APP_API_BASE_URL}/categories/create_cat`, categoryData, config);
             const data = response.data;
 
             if (response.status !== 200) {
@@ -42,7 +43,7 @@ export const listCategories = createAsyncThunk(
                 }
             }
 
-            const response = await axios.get(`${baseURL}/categories/list`, config);
+            const response = await axios.get(`${REACT_APP_API_BASE_URL}/categories/list`, config);
             
             const data = response.data;
 
@@ -68,7 +69,7 @@ export const removeCategory = createAsyncThunk(
                 }
             }
 
-            await axios.delete(`${baseURL}/categories/${categoryId}`, config);
+            await axios.delete(`${REACT_APP_API_BASE_URL}/categories/${categoryId}`, config);
         } catch (err) {
             return thunkAPI.rejectWithValue(err.response.data)
         }

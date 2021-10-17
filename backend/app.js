@@ -32,8 +32,6 @@ if (config.env){
 }
 
 app.use(express.json())
-// app.use(bodyParser.json())
-// app.use(bodyParser.urlencoded({extended: true}))
 app.use(cors())
 app.use('/api/users', user)
 app.use('/api/books1', book)
@@ -42,10 +40,10 @@ app.use('/api/categories', category)
 const __dirname = path.resolve()
 
 if(config.env === 'production'){
-    app.use(express.static(path.join(__dirname, '/frontend/build')))
+    app.use(express.static(path.join(__dirname, '../frontend/build')))
 
     app.get('*', async(req, res)=>{
-        res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'))
+        res.sendFile(path.resolve(__dirname, '../frontend', 'build', 'index.html'))
     })
 } else {
     app.get('/', (req, res)=>{
@@ -61,11 +59,11 @@ app.use((req, res, next) => {
     next();
   })
 
-const PORT = process.env.PORT || 5000
+const PORT = config.port || 3005
 
 app.listen(
     PORT,
     console.log(
-        `Server running in ${process.env.NODE_ENV} mode on port ${PORT}`.yellow.bold
+        `Server running in ${config.env} mode on port ${PORT}`.yellow.bold
     )
 )

@@ -1,11 +1,11 @@
-import { 
-    Flex, 
-    Text, 
-    Image, 
-    Stack, 
-    Icon, 
-    HStack, 
-    Button, 
+import {
+    Flex,
+    Text,
+    Image,
+    Stack,
+    Icon,
+    HStack,
+    Button,
     Box,
     Modal,
     ModalOverlay,
@@ -17,11 +17,12 @@ import {
 } from '@chakra-ui/react';
 import { MdStarRate, MdStarOutline } from 'react-icons/md'
 import BookScreen from './BookScreen'
-const baseURL = 'http://localhost:3005/api/books1/image'
+import { REACT_APP_API_BASE_URL } from '../util';
+
 
 const Book1 = ({ bookInfo }) => {
-    
-    const {isOpen, onOpen, onClose} = useDisclosure();
+
+    const { isOpen, onOpen, onClose } = useDisclosure();
     return (
         <Box borderRadius={"40px"} bg={"yellow.50"} boxShadow="2xl" >
             <Stack minH={'300px'} direction={{ base: 'column', md: 'row' }} w={'370px'}>
@@ -29,7 +30,7 @@ const Book1 = ({ bookInfo }) => {
                     <Image
                         alt={bookInfo.title}
                         objectFit={'cover'}
-                        src={`${baseURL}/${bookInfo._id}`}
+                        src={`${REACT_APP_API_BASE_URL}/${bookInfo._id}`}
                         borderRadius="40px"
                         transition="opacity 0.3s ease-in-out"
                         _hover={{
@@ -96,7 +97,7 @@ const Icons = () => (
     </HStack>
 )
 
-const ModalContainer = ({ isOpen, onClose, bookInfo}) => {
+const ModalContainer = ({ isOpen, onClose, bookInfo }) => {
     return (
         <Modal
             isCentered

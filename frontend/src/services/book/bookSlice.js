@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from 'axios';
 
-const baseURL = 'http://localhost:3005/api'
+import { REACT_APP_API_BASE_URL } from '../util';
 
 export const createBook = createAsyncThunk(
     'books/create',
@@ -18,7 +18,7 @@ export const createBook = createAsyncThunk(
                 }
             }
 
-            const response = await axios.post(`${baseURL}/books1/create`, bookData, config);
+            const response = await axios.post(`${REACT_APP_API_BASE_URL}/books1/create`, bookData, config);
             let data = response.data;
 
             if (response.status !== 200) {
@@ -42,7 +42,7 @@ export const listBooks = createAsyncThunk(
                 }
             }
 
-            const response = await axios.get(`${baseURL}/books1/all?keyword=${keyword}`, config);
+            const response = await axios.get(`${REACT_APP_API_BASE_URL}/books1/all?keyword=${keyword}`, config);
             let data = response.data;
             console.log(data)
             return data;
@@ -62,7 +62,7 @@ export const detailBook = createAsyncThunk(
                 }
             }
 
-            const response = await axios.get(`${baseURL}/books1/read/${bookId}`, config);
+            const response = await axios.get(`${REACT_APP_API_BASE_URL}/books1/read/${bookId}`, config);
             let data = response.data;
             console.log(data)
 
@@ -88,7 +88,7 @@ export const removeBook = createAsyncThunk(
                 }
             }
 
-            await axios.delete(`${baseURL}/books1/${bookId}`, config);
+            await axios.delete(`${REACT_APP_API_BASE_URL}/books1/${bookId}`, config);
         } catch (err) {
             return thunkAPI.rejectWithValue(err.response.data)
         }
@@ -110,7 +110,7 @@ export const updateBook = createAsyncThunk(
                 }
             }
 
-            const response = await axios.put(`${baseURL}/books1/update_book/${bookId}`, bookData, config);
+            const response = await axios.put(`${REACT_APP_API_BASE_URL}/books1/update_book/${bookId}`, bookData, config);
             let data = response.data;
 
             if (response.status !== 200) {
@@ -138,7 +138,7 @@ export const createBookReview = createAsyncThunk(
                 }
             }
 
-            const response = await axios.post(`${baseURL}/books1/create_review/${bookId}`, bookReview, config);
+            const response = await axios.post(`${REACT_APP_API_BASE_URL}/books1/create_review/${bookId}`, bookReview, config);
             let data = response.data;
 
             if (response.status !== 200) {
@@ -162,7 +162,7 @@ export const fetchComments = createAsyncThunk(
                 }
             }
 
-            const response = await axios.get(`${baseURL}/books1/comments/${bookId}`, config);
+            const response = await axios.get(`${REACT_APP_API_BASE_URL}/books1/comments/${bookId}`, config);
             let data = await response.data;
 
             return data;

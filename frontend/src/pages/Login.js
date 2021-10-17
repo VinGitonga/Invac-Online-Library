@@ -19,6 +19,8 @@ import { RiLoginCircleFill, RiLockUnlockFill } from 'react-icons/ri'
 import GoogleLogin from 'react-google-login'
 import Loader from '../components/Loader'
 import { loginUser, clearState, userSelector, authGoogle } from '../services/user/userSlice';
+import { REACT_APP_GOOGLE_CLIENT_ID } from '../util';
+
 
 const Login = () => {
     const dispatch = useDispatch();
@@ -27,14 +29,14 @@ const Login = () => {
     const [password, setPassword] = useState('');
 
     const { isFetching, isSuccess, isError, errorMessage, userInfo } = useSelector(userSelector);
-    const { 
-        isFetching: loadingGoogle, 
-        isSuccess: successGoogle, 
-        isError: errorGoogle, 
-        errorMessage: errMsgGoogle, 
+    const {
+        isFetching: loadingGoogle,
+        isSuccess: successGoogle,
+        isError: errorGoogle,
+        errorMessage: errMsgGoogle,
         userInfo: userGoogle
     } = useSelector(userSelector);
-    
+
 
     const clickSubmit = () => {
         const userData = { username: username, password: password };
@@ -51,7 +53,7 @@ const Login = () => {
         })
     }
 
-    const toastMessage = ({title, text, status})=> {
+    const toastMessage = ({ title, text, status }) => {
         toast({
             title: title,
             description: text,
@@ -100,7 +102,7 @@ const Login = () => {
     }, [successGoogle, errorGoogle, history, dispatch]);
 
     const googleSuccess = (response) => {
-        dispatch(authGoogle({tokenId: response.tokenId}))
+        dispatch(authGoogle({ tokenId: response.tokenId }))
     }
     const googleFailure = (response) => {
         console.log(response)
@@ -128,18 +130,18 @@ const Login = () => {
                 >
                     {loadingGoogle ? <Loader /> : null}
                     {successGoogle ? toastMessage({
-                        title:"Welcome Back",
+                        title: "Welcome Back",
                         text: userGoogle?.name,
-                        status:"success",
-                    }): null}
+                        status: "success",
+                    }) : null}
                     {errorGoogle ? toastMessage({
-                        title:"An error was encountered",
+                        title: "An error was encountered",
                         text: errMsgGoogle,
-                        status:"error",
-                    }): null}
+                        status: "error",
+                    }) : null}
                     <Stack spacing={4}>
                         <GoogleLogin
-                            clientId={`${process.env.REACT_APP_GOOGLE_CLIENT_ID}`}
+                            clientId={REACT_APP_GOOGLE_CLIENT_ID}
                             buttonText={"Login With Google"}
                             onSuccess={googleSuccess}
                             onFailure={googleFailure}

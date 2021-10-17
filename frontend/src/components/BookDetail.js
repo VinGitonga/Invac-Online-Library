@@ -8,7 +8,7 @@ import {
     useColorModeValue,
 } from '@chakra-ui/react'
 
-const baseURL = 'http://localhost:3005/api/books1/image'
+import { REACT_APP_API_BASE_URL } from '../util';
 
 const BookDetail = ({ book }) => {
     return (
@@ -21,7 +21,7 @@ const BookDetail = ({ book }) => {
                 pos={'relative'}
             >
                 <Image
-                    src={`${baseURL}/${book._id}`}
+                    src={`${REACT_APP_API_BASE_URL}/image/${book._id}`}
                     objectFit={'contain'}
                     w={"445px"}
                 />
